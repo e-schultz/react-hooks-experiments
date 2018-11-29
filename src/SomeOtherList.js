@@ -3,15 +3,15 @@ import { inputHook } from "./hooks/input-hook";
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 
-export function TodoList({ list = [] }) {
-  const [state, dispatch, { add, remove, update }] = arrayHook(list);
+export function SomeOtherList({ list = [] }) {
+  const [state, dispatch, { add, remove, update }] = arrayHook(list, "itemId");
   const { value, reset, onChange } = inputHook("");
   return (
     <>
       <form
         onSubmit={event => {
           event.preventDefault();
-          dispatch(add({ title: value, complete: false, id: Date.now() }));
+          dispatch(add({ title: value, complete: false, itemId: Date.now() }));
           reset();
         }}
       >
@@ -19,7 +19,7 @@ export function TodoList({ list = [] }) {
       </form>
       <ul>
         {state.map(item => (
-          <li key={item.id}>
+          <li key={item.itemId}>
             {item.title} - ({item.complete.toString()}){" "}
             <button onClick={() => dispatch(remove(item))}>X</button> |{" "}
             <button
