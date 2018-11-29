@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export const inputHook = initialValue => {
   const [value, setValue] = useState(initialValue);
@@ -8,6 +8,6 @@ export const inputHook = initialValue => {
     onChange: event => {
       setValue(event.target.value);
     },
-    reset: () => setValue('')
+    reset: () => setValue("")
   };
 };
