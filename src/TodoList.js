@@ -1,11 +1,12 @@
 import { arrayHook } from "./hooks/array-hook";
-import { inputHook } from "./hooks/input-hook";
+import { useInput } from "./hooks/input-hook";
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 
 export function TodoList({ list = [] }) {
-  const [state, dispatch, { add, remove, update }] = arrayHook(list);
-  const { value, reset, onChange } = inputHook("");
+  const [state, dispatch, { add, update }, removeBtn] = arrayHook(list);
+  
+  const { value, reset, bind } = useInput("");
   return (
     <>
       <form
@@ -15,13 +16,14 @@ export function TodoList({ list = [] }) {
           reset();
         }}
       >
-        <input value={value} onChange={onChange} />
+        <input value={value} {...bind} />
       </form>
       <ul>
         {state.map(item => (
           <li key={item.id}>
             {item.title} - ({item.complete.toString()}){" "}
-            <button onClick={() => dispatch(remove(item))}>X</button> |{" "}
+            {removeBtn(item)}
+            {/*<button onClick={() => dispatch(remove(item))}>X</button>*/} |{" "}
             <button
               onClick={() =>
                 dispatch(update({ ...item, complete: !item.complete }))

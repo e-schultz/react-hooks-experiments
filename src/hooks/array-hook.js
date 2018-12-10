@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import React, { useReducer } from "react";
 
 const actionCreators = (...actions) =>
   actions.reduce(
@@ -26,5 +26,11 @@ export const arrayHook = (initialValue = [], id = "id") => {
     }
   };
   const [arrayState, arrayDispatch] = useReducer(reducer, initialValue);
-  return [arrayState, arrayDispatch, actionCreators("add", "remove", "update")];
+  const { add, remove, update } = actionCreators("add", "remove", "update");
+  return [
+    arrayState,
+    arrayDispatch,
+    { add, remove, update },
+    item => <button onClick={() => arrayDispatch(remove(item))}>Remove</button>
+  ];
 };

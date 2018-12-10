@@ -1,11 +1,11 @@
 import { arrayHook } from "./hooks/array-hook";
-import { inputHook } from "./hooks/input-hook";
+import { useInput } from "./hooks/input-hook";
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 
 export function SomeOtherList({ list = [] }) {
   const [state, dispatch, { add, remove, update }] = arrayHook(list, "itemId");
-  const { value, reset, onChange } = inputHook("");
+  const { value, reset, bind } = useInput("");
   return (
     <>
       <form
@@ -15,7 +15,7 @@ export function SomeOtherList({ list = [] }) {
           reset();
         }}
       >
-        <input value={value} onChange={onChange} />
+        <input value={value} {...bind} />
       </form>
       <ul>
         {state.map(item => (
