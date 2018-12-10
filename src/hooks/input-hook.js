@@ -1,13 +1,17 @@
 import { useState } from "react";
 
-export const inputHook = initialValue => {
+export const useInput = initialValue => {
   const [value, setValue] = useState(initialValue);
 
   return {
     value,
-    onChange: event => {
-      setValue(event.target.value);
-    },
-    reset: () => setValue("")
+    setValue,
+    reset: () => setValue(""),
+    bind: {
+      value,
+      onChange: event => {
+        setValue(event.target.value);
+      }
+    }
   };
 };
