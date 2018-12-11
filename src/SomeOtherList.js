@@ -1,10 +1,10 @@
-import { arrayHook } from "./hooks/array-hook";
+import { useList } from "./hooks/array-hook";
 import { useInput } from "./hooks/input-hook";
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 
 export function SomeOtherList({ list = [] }) {
-  const [state, dispatch, { add, remove, update }] = arrayHook(list, "itemId");
+  const [state, dispatch, { add, remove, update }] = useList(list, "itemId");
   const { value, reset, bind } = useInput("");
   return (
     <>

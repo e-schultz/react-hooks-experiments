@@ -9,7 +9,7 @@ const actionCreators = (...actions) =>
     {}
   );
 
-export const arrayHook = (initialValue = [], id = "id") => {
+export const useList = (initialValue = [], id = "id") => {
   const reducer = (state, action) => {
     switch (action.type) {
       case "add":

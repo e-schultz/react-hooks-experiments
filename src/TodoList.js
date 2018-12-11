@@ -1,10 +1,10 @@
-import { arrayHook } from "./hooks/array-hook";
+import { useList } from "./hooks/array-hook";
 import { useInput } from "./hooks/input-hook";
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 
 export function TodoList({ list = [] }) {
-  const [state, dispatch, { add, update }, removeBtn] = arrayHook(list);
+  const [state, dispatch, { add, update }, removeBtn] = useList(list);
   
   const { value, reset, bind } = useInput("");
   return (
